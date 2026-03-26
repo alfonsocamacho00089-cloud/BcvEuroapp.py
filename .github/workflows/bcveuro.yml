@@ -23,7 +23,7 @@ jobs:
         run: pip install requests
 
       - name: Correr Script
-        run: python captura_bcv.py
+        run: python bcveuroapp.py
 
       - name: Guardar cambios en el repo
         run: |
