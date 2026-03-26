@@ -12,12 +12,12 @@ def capturar():
         # Creamos una lista con el formato que necesitamos
         resultado = [{
             "banco": "BCV Oficial",
-            "precio": data.get('promedio'),
+            "precio": data.get('actualizada'),
             "fecha": data.get('fechaActualizacion')
         }]
         
         # Guardamos en el archivo
-        with open("bancos.json", "w") as f:
+        with open("bcveuro.json", "w") as f:
             json.dump(resultado, f, indent=4)
         print("¡LOGRADO!")
             
