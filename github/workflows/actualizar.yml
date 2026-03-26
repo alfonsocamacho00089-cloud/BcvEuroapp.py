@@ -29,6 +29,6 @@ jobs:
         run: |
           git config --global user.name 'Robot-BCV'
           git config --global user.email 'robot@github.com'
-          git add bancos.json
+          git add Bcveuro.json
           git commit -m "Tasas actualizadas automáticamente" || echo "No hay cambios"
           git push
