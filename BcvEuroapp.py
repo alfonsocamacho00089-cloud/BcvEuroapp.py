@@ -53,5 +53,5 @@ def capturar():
         print("¡LOGRADO! Precio nuevo detectado.")
         enviar_notificacion_precio(precio_bcv)        
 
-if __name__ == "__main__":
-    capturar()
+        if __name__ == "__main__":
+        capturar()
