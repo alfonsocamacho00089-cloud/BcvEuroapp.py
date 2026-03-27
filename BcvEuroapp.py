@@ -1,8 +1,8 @@
 import requests
 import json
-import streamlit as st
+
 def capturar():
-    st.title("Monitor BCV")
+    
     # Esta es la URL más estable ahorita para el BCV
     url = "https://ve.dolarapi.com/v1/dolares/oficial"
     
