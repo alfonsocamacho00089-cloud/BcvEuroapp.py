@@ -28,32 +28,30 @@ def capturar():
     try:
         response = requests.get(url, timeout=20)
         data = response.json()
-       # --- AGREGAR ESTO ---
+    # --- AGREGAR ESTO ---
+        precio_bcv = data.get('promedio')
+        fecha_bcv = data.get('fechaActualizacion')
+
         try:
             with open("Bcveuro.json", "r") as f:
-                if json.load(f)[0].get('precio') == data.get('promedio'):
-                    return # Si es igual, se sale y no hace nada más
+                datos_viejos = json.load(f)
+                if datos_viejos[0].get('precio') == precio_bcv:
+                    print("El BCV no ha cambiado. Abortando misión.")
+                    return
         except:
-            pass # Si el archivo no existe, sigue normal
-        # ---------------------
-       # st.metric(label="Precio Dólar BCV", value=data.get('promedio'))
-        # Creamos una lista con el formato que necesitamos
+            pass
+
         resultado = [{
             "banco": "BCV Oficial",
-            "precio": data.get('promedio'),
-            "fecha": data.get('fechaActualizacion')
+            "precio": precio_bcv,
+            "fecha": fecha_bcv
         }]
-        
-        # Guardamos en el archivo
+
         with open("Bcveuro.json", "w") as f:
             json.dump(resultado, f, indent=4)
-        print("¡LOGRADO!")
-          # Buscamos el precio que acabas de obtener
-        precio_bcv = data.get('promedio')
-        # ¡Mandamos la notificación!
-        enviar_notificacion_precio(precio_bcv)  
-    except Exception as e:
-        print(f"Error: {e}")
+            
+        print("¡LOGRADO! Precio nuevo detectado.")
+        enviar_notificacion_precio(precio_bcv)        
 
 if __name__ == "__main__":
     capturar()
