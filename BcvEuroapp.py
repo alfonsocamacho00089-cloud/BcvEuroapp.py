@@ -17,7 +17,7 @@ def capturar():
         except:
             pass # Si el archivo no existe, sigue normal
         # ---------------------
-        st.metric(label="Precio Dólar BCV", value=data.get('promedio'))
+       # st.metric(label="Precio Dólar BCV", value=data.get('promedio'))
         # Creamos una lista con el formato que necesitamos
         resultado = [{
             "banco": "BCV Oficial",
