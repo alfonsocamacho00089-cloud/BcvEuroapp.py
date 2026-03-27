@@ -1,14 +1,15 @@
 import requests
 import json
-
+import streamlit as st
 def capturar():
+    st.title("Monitor BCV")
     # Esta es la URL más estable ahorita para el BCV
     url = "https://ve.dolarapi.com/v1/dolares/oficial"
     
     try:
         response = requests.get(url, timeout=20)
         data = response.json()
-        
+        st.metric(label="Precio Dólar BCV", value=data.get('promedio'))
         # Creamos una lista con el formato que necesitamos
         resultado = [{
             "banco": "BCV Oficial",
