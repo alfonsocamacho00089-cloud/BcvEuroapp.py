@@ -54,4 +54,4 @@ def capturar():
         enviar_notificacion_precio(precio_bcv)        
 
         if __name__ == "__main__":
-        capturar()
+         capturar()
