@@ -19,8 +19,8 @@ jobs:
         with:
           python-version: '3.9'
 
-      - name: Instalar Python
-        run: pip python requests
+      - name: Instalar Requests
+        run: pip install requests
         
       - name: Correr Script
         run: python BcvEuroapp.py
