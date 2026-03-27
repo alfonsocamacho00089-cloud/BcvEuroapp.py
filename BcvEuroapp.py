@@ -51,7 +51,10 @@ def capturar():
             json.dump(resultado, f, indent=4)
             
         print("¡LOGRADO! Precio nuevo detectado.")
-        enviar_notificacion_precio(precio_bcv)        
+        enviar_notificacion_precio(precio_bcv)  
 
-        if __name__ == "__main__":
-         capturar()
+    except Exception as e:
+        print(f"Error en la captura: {e}")
+
+if __name__ == "__main__":
+    capturar()
