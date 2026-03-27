@@ -9,6 +9,14 @@ def capturar():
     try:
         response = requests.get(url, timeout=20)
         data = response.json()
+       # --- AGREGAR ESTO ---
+        try:
+            with open("Bcveuro.json", "r") as f:
+                if json.load(f)[0].get('precio') == data.get('promedio'):
+                    return # Si es igual, se sale y no hace nada más
+        except:
+            pass # Si el archivo no existe, sigue normal
+        # ---------------------
         st.metric(label="Precio Dólar BCV", value=data.get('promedio'))
         # Creamos una lista con el formato que necesitamos
         resultado = [{
