@@ -19,8 +19,8 @@ jobs:
         with:
           python-version: '3.9'
 
-      - name: Instalar Requests
-        run: pip install requests
+      - name: Instalar Librerías
+        run: pip install requests firebase-admin
         
       - name: Correr Script
         run: python BcvEuroapp.py
