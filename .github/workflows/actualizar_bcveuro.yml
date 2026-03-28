@@ -2,10 +2,10 @@ name: Actualizador de Tasas BCV
 
 on:
   schedule:
-    # CADA 5 MIN de 4:00 PM a 6:59 PM Vzla (Hora UTC: 20:00 a 22:59)
+    # CADA 5 MIN de 4:00 PM a 6:59 PM Vzla
     - cron: '*/5 20-22 * * *'
     - cron: '45 19 * * *'
-  workflow_dispatch: # Esto te permite darle a un botón para actualizar YA
+  workflow_dispatch: # <-- Ahora sí está en la columna correcta
 
 jobs:
   actualizar-data:
@@ -21,16 +21,16 @@ jobs:
 
       - name: Instalar Librerías
         run: pip install requests firebase-admin
-        
-       - name: Run Script
+
+      - name: Run Script
         run: python BcvEuroapp.py
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
 
       - name: Guardar cambios en el repo
         run: |
-          git config --global user.name 'Robot-github-actions[bot'
+          git config --global user.name 'Robot'
           git config --global user.email 'robot@github.com'
           git add Bcveuro.json
-          git commit -m "Tasas actualizadas automáticamente" || echo "No hay cambios"
+          git commit -m "Tasas actualizadas automáticamente"
           git push
