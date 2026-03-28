@@ -31,6 +31,6 @@ jobs:
         run: |
           git config --global user.name 'Robot'
           git config --global user.email 'robot@github.com'
-          git add Bcveuro.json
-          git commit -m "Tasas actualizadas automáticamente" || exit 0
+          git add Bcveuro.json Bcveuro_proxima.json Bcveuro_vigente.json
+          git commit -m "Tasas actualizadas: General, Proxima y Vigente" || exit 0
           git push
