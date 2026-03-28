@@ -58,20 +58,33 @@ def capturar():
         if tasa_dolar and tasa_euro:
             # --- Lógica de comparación ---
             try:
-                with open("Bcveuro.json", "r") as f:
-                    contenido_previo = json.load(f)
-                    if contenido_previo[0].get('precio_dolar') == tasa_dolar:
-                        print(f"El precio sigue siendo {tasa_dolar}. No es necesario actualizar.")
-                        return 
-            except Exception:
-                pass # Si el archivo no existe, seguimos adelante
+            with open("Bcveuro.json", "r") as f:
+                historial = json.load(f)
+                # Si el precio no ha cambiado, no hacemos nada
+                if historial[0].get('precio_dolar') == tasa_dolar:
+                    print(f"El precio {tasa_dolar} no ha cambiado.")
+                    return 
+                tasa_vieja = historial[0] # Guardamos la que era 'nueva' para que sea 'vieja'
+        except:
+            # Si el archivo no existe, la vieja será igual a la nueva por esta vez
+            tasa_vieja = {"banco": "BCV", "precio_dolar": tasa_dolar, "precio_euro": tasa_euro, "fecha": fecha_valor}
 
-            resultado = [{
+            resultado = [
+            {
                 "banco": "BCV Oficial",
                 "precio_dolar": tasa_dolar,
                 "precio_euro": tasa_euro,
-                "fecha": fecha_valor
-            }]
+                "fecha": fecha_valor,
+                "estado": "proxima"
+            },
+            {
+                "banco": "BCV Oficial",
+                "precio_dolar": tasa_vieja.get('precio_dolar'),
+                "precio_euro": tasa_vieja.get('precio_euro'),
+                "fecha": tasa_vieja.get('fecha'),
+                "estado": "vigente"
+            }
+            ]
 
             with open("Bcveuro.json", "w") as f:
                 json.dump(resultado, f, indent=4)
