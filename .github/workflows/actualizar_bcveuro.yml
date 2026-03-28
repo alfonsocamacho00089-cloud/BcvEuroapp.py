@@ -32,5 +32,6 @@ jobs:
           git config --global user.name 'Robot'
           git config --global user.email 'robot@github.com'
           git add Bcveuro.json Bcveuro_proxima.json Bcveuro_vigente.json
+          git pull --rebase origin main  # <--- ESTA LÍNEA ES LA QUE FALTA
           git commit -m "Tasas actualizadas: General, Proxima y Vigente" || exit 0
           git push
