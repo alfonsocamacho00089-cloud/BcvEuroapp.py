@@ -5,7 +5,7 @@ on:
     # CADA 5 MIN de 4:00 PM a 6:59 PM Vzla
     - cron: '*/5 20-22 * * *'
     - cron: '45 19 * * *'
-  workflow_dispatch: # <-- Ahora sí está en la columna correcta
+  workflow_dispatch: # <--- ESTO ACTIVA EL BOTÓN VERDE
 
 jobs:
   actualizar-data:
@@ -32,5 +32,5 @@ jobs:
           git config --global user.name 'Robot'
           git config --global user.email 'robot@github.com'
           git add Bcveuro.json
-          git commit -m "Tasas actualizadas automáticamente"
+          git commit -m "Tasas actualizadas automáticamente" || exit 0
           git push
