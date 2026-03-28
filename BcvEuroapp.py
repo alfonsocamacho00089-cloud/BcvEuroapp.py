@@ -6,7 +6,7 @@ import urllib3
 import firebase_admin
 from firebase_admin import credentials, messaging
 
-# Desactivar advertencias de certificados (como en tu 2do código)
+# Desactivar advertencias de certificados
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # Configuración de Firebase
@@ -36,8 +36,6 @@ def capturar():
         response = requests.get(url, headers=headers, verify=False, timeout=30)
         soup = BeautifulSoup(response.text, 'html.parser')
         
-        # BUSQUEDA POR ID (Más preciso para el sitio del BCV)
-        # El BCV usa IDs como 'dolar' y 'euro' dentro de divs
         div_dolar = soup.find('div', id='dolar')
         div_euro = soup.find('div', id='euro')
         
@@ -45,45 +43,41 @@ def capturar():
         tasa_euro = None
 
         if div_dolar:
-            # Extraemos el texto, quitamos puntos de mil y cambiamos coma por punto
             tasa_dolar = div_dolar.find('strong').get_text(strip=True).replace('.', '').replace(',', '.')
         
         if div_euro:
             tasa_euro = div_euro.find('strong').get_text(strip=True).replace('.', '').replace(',', '.')
 
-        # Buscamos la fecha que suele estar en un span con clase 'date-display-single'
         fecha_tag = soup.find('span', class_='date-display-single')
         fecha_valor = fecha_tag.get_text(strip=True) if fecha_tag else "Fecha no encontrada"
 
         if tasa_dolar and tasa_euro:
-            # --- Lógica de comparación ---
+            # --- Lógica de historial (Dos posiciones) ---
             try:
-            with open("Bcveuro.json", "r") as f:
-                historial = json.load(f)
-                # Si el precio no ha cambiado, no hacemos nada
-                if historial[0].get('precio_dolar') == tasa_dolar:
-                    print(f"El precio {tasa_dolar} no ha cambiado.")
-                    return 
-                tasa_vieja = historial[0] # Guardamos la que era 'nueva' para que sea 'vieja'
-        except:
-            # Si el archivo no existe, la vieja será igual a la nueva por esta vez
-            tasa_vieja = {"banco": "BCV", "precio_dolar": tasa_dolar, "precio_euro": tasa_euro, "fecha": fecha_valor}
+                with open("Bcveuro.json", "r") as f:
+                    historial = json.load(f)
+                    if historial[0].get('precio_dolar') == tasa_dolar:
+                        print(f"El precio {tasa_dolar} no ha cambiado.")
+                        return 
+                    tasa_vieja = historial[0]
+            except:
+                tasa_vieja = {"banco": "BCV", "precio_dolar": tasa_dolar, "precio_euro": tasa_euro, "fecha": fecha_valor}
 
             resultado = [
-            {
-                "banco": "BCV Oficial",
-                "precio_dolar": tasa_dolar,
-                "precio_euro": tasa_euro,
-                "fecha": fecha_valor,
-                "estado": "proxima"
-            },
-            {
-                "banco": "BCV Oficial",
-                "precio_dolar": tasa_vieja.get('precio_dolar'),
-                "precio_euro": tasa_vieja.get('precio_euro'),
-                "fecha": tasa_vieja.get('fecha'),
-                "estado": "vigente"
-            }
+                {
+                    "banco": "BCV Oficial",
+                    "precio_dolar": tasa_dolar,
+                    "precio_euro": tasa_euro,
+                    "fecha": fecha_valor,
+                    "estado": "proxima"
+                },
+                {
+                    "banco": "BCV Oficial",
+                    "precio_dolar": tasa_vieja.get('precio_dolar'),
+                    "precio_euro": tasa_vieja.get('precio_euro'),
+                    "fecha": tasa_vieja.get('fecha'),
+                    "estado": "vigente"
+                }
             ]
 
             with open("Bcveuro.json", "w") as f:
@@ -92,7 +86,7 @@ def capturar():
             print(f"¡Actualizado con éxito! Dólar: {tasa_dolar}")
             enviar_notificacion_precio(tasa_dolar, tasa_euro)
         else:
-            print("No se pudieron capturar las tasas. Revisa los selectores HTML.")
+            print("No se pudieron capturar las tasas.")
 
     except Exception as e:
         print(f"Error en la captura: {e}")
