@@ -52,7 +52,7 @@ def capturar():
         fecha_valor = fecha_tag.get_text(strip=True) if fecha_tag else "Fecha no encontrada"
 
         if tasa_dolar and tasa_euro:
-            # --- Lógica de historial (Dos posiciones) ---
+            # 1. LEER TASA VIEJA
             try:
                 with open("Bcveuro.json", "r") as f:
                     historial = json.load(f)
@@ -61,8 +61,9 @@ def capturar():
                         return 
                     tasa_vieja = historial[0]
             except:
-                tasa_vieja = {"banco": "BCV", "precio_dolar": tasa_dolar, "precio_euro": tasa_euro, "fecha": fecha_valor}
+                tasa_vieja = {"banco": "BCV Oficial", "precio_dolar": tasa_dolar, "precio_euro": tasa_euro, "fecha": fecha_valor}
 
+            # 2. PREPARAR EL RESULTADO (LAS DOS TASAS)
             resultado = [
                 {
                     "banco": "BCV Oficial",
@@ -80,6 +81,7 @@ def capturar():
                 }
             ]
 
+            # 3. GUARDAR EN EL JSON (ESTO ES LO QUE NO DEBE FALTAR)
             with open("Bcveuro.json", "w") as f:
                 json.dump(resultado, f, indent=4)
             
