@@ -4,6 +4,13 @@
         "precio_dolar": "471.70040000",
         "precio_euro": "543.94131626",
         "fecha": "27-03-2026",
+        "estado": "proxima"
+    },
+    {
+        "banco": "BCV Oficial",
+        "precio_dolar": "471.70040000",
+        "precio_euro": "543.94131626",
+        "fecha": "27-03-2026",
         "estado": "vigente"
     }
 ]
