@@ -27,7 +27,7 @@ jobs:
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
 
-      - - name: Guardar cambios en el repo
+       - name: Guardar cambios en el repo
         run: |
           git config --global user.name 'Robot'
           git config --global user.email 'robot@github.com'
