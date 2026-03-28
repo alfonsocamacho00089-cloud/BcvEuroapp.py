@@ -2,11 +2,14 @@ name: Actualizador de Tasas BCV
 
 on:
   schedule:
-    # CADA 5 MIN de 4:00 PM a 6:59 PM Vzla
-    - cron: '*/5 20-22 * * *'
-    - cron: '45 19 * * *'
-  workflow_dispatch: # <--- ESTO ACTIVA EL BOTÓN VERDE
+    # Corre cada 5 min de 4:00 PM a 6:59 PM (Hora Vzla) de Lunes a Viernes
+    # 20-22 UTC = 16-18 VZLA | 1-5 = Lunes a Viernes
+    - cron: '*/5 20-22 * * 1-5'
+    
+    # Corre a las 3:45 PM (Hora Vzla) para preparar la transición
+    - cron: '45 19 * * 1-5'
 
+  workflow_dispatch: # Mantiene el botón verde activo
 jobs:
   actualizar-data:
     runs-on: ubuntu-latest
