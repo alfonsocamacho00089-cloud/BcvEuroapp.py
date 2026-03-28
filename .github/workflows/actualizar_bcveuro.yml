@@ -20,8 +20,8 @@ jobs:
           python-version: '3.9'
 
       - name: Instalar Librerías
-        run: pip install requests firebase-admin
-
+        run: pip install requests firebase-admin beautifulsoup4
+    
       - name: Run Script
         run: python BcvEuroapp.py
         env:
