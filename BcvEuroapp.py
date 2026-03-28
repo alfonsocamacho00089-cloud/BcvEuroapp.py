@@ -52,18 +52,20 @@ def capturar():
         fecha_valor = fecha_tag.get_text(strip=True) if fecha_tag else "Fecha no encontrada"
 
         if tasa_dolar and tasa_euro:
-            # 1. LEER TASA VIEJA
+            # 1. ATRAPAMOS LA TASA QUE YA ESTABA EN EL JSON (LA VIEJA)
             try:
                 with open("Bcveuro.json", "r") as f:
                     historial = json.load(f)
+                    # Si el precio no ha cambiado, no hacemos nada
                     if historial[0].get('precio_dolar') == tasa_dolar:
                         print(f"El precio {tasa_dolar} no ha cambiado.")
                         return 
-                    tasa_vieja = historial[0]
+                    tasa_vieja = historial[0] # Esta pasa a ser 'vigente'
             except:
+                # Si no hay archivo previo, usamos la actual como respaldo
                 tasa_vieja = {"banco": "BCV Oficial", "precio_dolar": tasa_dolar, "precio_euro": tasa_euro, "fecha": fecha_valor}
 
-            # 2. PREPARAR EL RESULTADO (LAS DOS TASAS)
+            # 2. GUARDAMOS LAS DOS: LA NUEVA DE PRIMERO [0] Y LA VIEJA DE SEGUNDO [1]
             resultado = [
                 {
                     "banco": "BCV Oficial",
@@ -81,7 +83,7 @@ def capturar():
                 }
             ]
 
-            # 3. GUARDAR EN EL JSON (ESTO ES LO QUE NO DEBE FALTAR)
+            # 3. GUARDAMOS EL ARCHIVO
             with open("Bcveuro.json", "w") as f:
                 json.dump(resultado, f, indent=4)
             
