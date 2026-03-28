@@ -22,7 +22,7 @@ jobs:
       - name: Instalar Librerías
         run: pip install requests firebase-admin
         
-      - - name: Run Script
+       - name: Run Script
         run: python BcvEuroapp.py
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
