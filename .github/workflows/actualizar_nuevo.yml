@@ -18,3 +18,10 @@ jobs:
         run: python BcvEuroapp.py
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+      - name: Save changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add Bcveuro.json
+          git commit -m "Actualizando precio BCV" || echo "Sin cambios"
+          git push
