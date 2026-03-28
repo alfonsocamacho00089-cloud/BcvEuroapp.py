@@ -83,9 +83,6 @@ def capturar():
 
     except Exception as e:
         print(f"Error en la captura: {e}")
-            # Mandamos la notificación con las dos tasas
-            enviar_notificacion_precio(tasa_dolar, tasa_euro)
-        
 
 if __name__ == "__main__":
     capturar()
