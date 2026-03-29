@@ -2,12 +2,9 @@ name: Actualizador de Tasas BCV
 
 on:
   schedule:
-    # Corre cada 5 min de 4:00 PM a 6:59 PM (Hora Vzla) de Lunes a Viernes
-    # 20-22 UTC = 16-18 VZLA | 1-5 = Lunes a Viernes
-    - cron: '*/5 20-22 * * 1-5'
-    
-    # Corre a las 3:45 PM (Hora Vzla) para preparar la transición
-    - cron: '45 19 * * 1-5'
+    # Corre cada 15 min de 4:00 PM a 7:59 PM (Hora Vzla) de Lunes a Viernes
+    # (20:00 a 00:00 UTC)
+    - cron: '*/15 20-23 * * 1-5'
 
   workflow_dispatch: # Mantiene el botón verde activo
 jobs:
