@@ -1,16 +1,16 @@
 [
     {
         "banco": "BCV Oficial",
-        "precio_dolar": "496.83010000",
-        "precio_euro": "583.86976521",
-        "fecha": "06-05-2026",
+        "precio_dolar": "499.86080000",
+        "precio_euro": "588.09622841",
+        "fecha": "07-05-2026",
         "estado": "proxima"
     },
     {
         "banco": "BCV Oficial",
-        "precio_dolar": "499.86080000",
-        "precio_euro": "588.09622841",
-        "fecha": "07-05-2026",
+        "precio_dolar": "496.83010000",
+        "precio_euro": "583.86976521",
+        "fecha": "06-05-2026",
         "estado": "vigente"
     }
 ]
