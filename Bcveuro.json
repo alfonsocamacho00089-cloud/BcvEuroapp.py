@@ -1,16 +1,16 @@
 [
     {
         "banco": "BCV Oficial",
-        "precio_dolar": "742.81050000",
-        "precio_euro": "844.75381302",
-        "fecha": "27-07-2026",
+        "precio_dolar": "744.22640000",
+        "precio_euro": "846.07378284",
+        "fecha": "28-07-2026",
         "estado": "proxima"
     },
     {
         "banco": "BCV Oficial",
-        "precio_dolar": "742.22920000",
-        "precio_euro": "844.21891437",
-        "fecha": "23-07-2026",
+        "precio_dolar": "742.81050000",
+        "precio_euro": "844.75381302",
+        "fecha": "27-07-2026",
         "estado": "vigente"
     }
 ]
