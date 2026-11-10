@@ -4,7 +4,9 @@ on:
   schedule:
     # Corre cada 15 min de 4:00 PM a 7:59 PM (Hora Vzla) de Lunes a Viernes
     # (20:00 a 00:00 UTC)
-    - cron: '*/15 14-18 * * 1-5'
+    - cron: '59 3 * * 1'
+    - cron: '*/15 20-23 * * 1-5'
+    
 
   workflow_dispatch: # Mantiene el botón verde activo
 jobs:
