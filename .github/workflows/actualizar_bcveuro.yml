@@ -3,12 +3,7 @@ name: Actualizador de Tasas BCV
 
 on:
   schedule:
-    # 1. Para que corra a las 11:59 PM de Venezuela (03:59 UTC)
-    - cron: '59 3 * * 2-6'
-    
-    # 2. Para que corra a las 6:00 AM de Venezuela de lunes a viernes (10:00 UTC)
-    - cron: '0 10 * * 1-5'
-
+    - cron: '*/15 20-23 * * 1-5'
   workflow_dispatch: # Mantiene el botón verde activo
 jobs:
   actualizar-data:
