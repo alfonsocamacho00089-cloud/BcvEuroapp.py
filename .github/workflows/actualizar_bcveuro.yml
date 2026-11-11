@@ -1,6 +1,6 @@
 name: Actualizador de Tasas BCV
 
-on:
+
 on:
   schedule:
     # 1. Para que corra a las 11:59 PM de Venezuela (03:59 UTC)
