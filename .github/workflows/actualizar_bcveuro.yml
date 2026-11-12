@@ -4,7 +4,7 @@ name: Actualizador de Tasas BCV
 on:
   schedule:
     - cron: '*/15 19-23 * * 1-5'
-    - cron: '*/15 0 * * 1'
+    - cron: '*/15 0-5 * * 1-5'
   workflow_dispatch: # Mantiene el botón verde activo
 jobs:
   actualizar-data:
