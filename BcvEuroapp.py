@@ -85,12 +85,9 @@ def capturar():
 
             # 3. GUARDAMOS EN ARCHIVOS SEPARADOS (Lógica: Proxima es Nueva / Vigente es Anterior)
             # Guardamos la Tasa Proxima (El registro [0] con el precio nuevo del BCV)
-            with open("Bcveuro_proxima.json", "w") as f:
+            with open("Bcveuro_proximaN.json", "w") as f:
                 json.dump([resultado[0]], f, indent=4)
             
-            # Guardamos la Tasa Vigente (El registro [1] que ya estaba en el sistema)
-            with open("Bcveuro_vigente.json", "w") as f:
-                json.dump([resultado[1]], f, indent=4)
             
             # Mantenemos el archivo combinado original por respaldo
             with open("Bcveuro.json", "w") as f:
